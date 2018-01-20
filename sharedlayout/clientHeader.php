@@ -25,5 +25,13 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
+		<script type="text/javascript" src="./assets/js/fusionchart/js/fusioncharts.js"></script>
+
+		<!--<script type="text/javascript">
+		FusionCharts['debugger'].outputTo(function (message) {
+		    console.log(message);
+		});
+		FusionCharts['debugger'].enable(true);
+	</script> -->
 
 </head>

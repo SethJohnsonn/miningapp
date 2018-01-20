@@ -26,3 +26,32 @@ function getCookie(cname) {
     }
     return "";
 }
+
+$(function(){
+	  $.ajax({
+	    url: 'http://localhost/chartData.php',
+	    type: 'GET',
+	    success : function(data) {
+	      chartData = data;
+	      var chartProperties = {
+	        "caption": "Hashrate over 24 Hours",
+	        "xAxisName": "Time",
+	        "yAxisName": "Hash Rate",
+
+	        "theme": "zune"
+	      };
+	      var apiChart = new FusionCharts({
+	        type: 'line',
+	        renderAt: 'chartdata',
+	        width: '500',
+	        height: '400',
+	        dataFormat: 'json',
+	        dataSource: {
+	          "chart": chartProperties,
+	          "data": chartData
+	        }
+	      });
+	      apiChart.render();
+	    }
+	  });
+	});

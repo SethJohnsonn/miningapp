@@ -51,7 +51,7 @@ if($num_rows > 0){
                       <p class="">No Contract</p>
                       <p class="">No Maintenance Fee</p>
                       <br>
-                      <button class="btn btn-warning" type="button" onclick="checkSignup(this.form)">Buy Now!</button>
+                      <a href="buyPower.php" class="btn btn-warning" type="button">Buy Now!</a>
                       <br>
                       <button class="btn btn-default" type="button">Details</button>
                   </div>
@@ -73,7 +73,7 @@ if($num_rows > 0){
                         <p class="">No Contract</p>
                         <p class="">No Maintenance Fee</p>
                         <br>
-                        <button class="btn btn-warning" type="submit">Buy Now!</button>
+                        <a href="buyPower.php" class="btn btn-warning" type="button">Buy Now!</a>
                         <br>
                         <button class="btn btn-default" type="button">Details</button>
                     </div>
@@ -95,7 +95,7 @@ if($num_rows > 0){
                       <p class="">No Contract</p>
                       <p class="">No Maintenance Fee</p>
                       <br>
-                      <button class="btn btn-warning" type="submit">Buy Now!</button>
+                      <a href="buyPower.php" class="btn btn-warning" type="button" onclick="buyPower.php">Buy Now!</a>
                       <br>
                       <button class="btn btn-default" type="button">Details</button>
                   </div>

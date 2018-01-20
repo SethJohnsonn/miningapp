@@ -1,4 +1,27 @@
-<?php include "./sharedlayout/clientHeader.php";
+<?php
+session_start();
+include 'dbclass.php';
+if($_SESSION['validated'] != ''){
+
+$Email = $_SESSION['Email'];
+$sqlCount ="SELECT COUNT(Email) FROM customers where Email ='$Email'";
+$res = DB::get()->prepare($sqlCount);
+$res->execute();
+$num_rows = $res->fetchColumn();
+$sql = "SELECT * FROM customers where Email='$Email'";
+$results = DB::get()->prepare($sql);
+$results = DB::get()->query($sql);
+if ($num_rows > 0){
+  while($row = $results->fetch())
+  {
+    $CustomerID=$row['ID'];
+    $FirstName=$row['FirstName'];
+    $LastName=$row['LastName'];
+		$wallet = $row['wallet'];
+  }
+  $results=null;
+}
+include "./sharedlayout/clientHeader.php";
 ?>
 <body>
   	<?php include "./sharedlayout/clientNav.php"; ?>
@@ -8,21 +31,11 @@
             <div class="row">
                 <div class="col-lg-4 col-md-5">
                     <div class="card card-user">
-                        <div class="image">
-                            <img src="assets/img/background.jpg" alt="..."/>
-                        </div>
                         <div class="content">
-                            <div class="author">
-                              <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
-                              <h4 class="title">Chet Faker<br />
-                                 <a href="#"><small>@chetfaker</small></a>
+                              <br><br><br>
+                              <h4 class="title"><?php echo $FirstName. ' ' .$LastName ?><br />
                               </h4>
-                            </div>
-                            <p class="description text-center">
-                                "I like the way you work it <br>
-                                No diggity <br>
-                                I wanna bag it up"
-                            </p>
+
                         </div>
                         <hr>
                         <div class="text-center">
@@ -39,68 +52,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="header">
-                            <h4 class="title">Team Members</h4>
-                        </div>
-                        <div class="content">
-                            <ul class="list-unstyled team-members">
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <div class="avatar">
-                                                        <img src="assets/img/faces/face-0.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    DJ Khaled
-                                                    <br />
-                                                    <span class="text-muted"><small>Offline</small></span>
-                                                </div>
 
-                                                <div class="col-xs-3 text-right">
-                                                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <div class="avatar">
-                                                        <img src="assets/img/faces/face-1.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    Creative Tim
-                                                    <br />
-                                                    <span class="text-success"><small>Available</small></span>
-                                                </div>
 
-                                                <div class="col-xs-3 text-right">
-                                                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <div class="avatar">
-                                                        <img src="assets/img/faces/face-3.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    Flume
-                                                    <br />
-                                                    <span class="text-danger"><small>Busy</small></span>
-                                                </div>
-
-                                                <div class="col-xs-3 text-right">
-                                                    <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
@@ -175,18 +128,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>About Me</label>
-                                            <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">Oh so, your weak rhyme
-You doubt I'll bother, reading into it
-I'll probably won't, left to my own devices
-But that's the difference in our opinions.</textarea>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
                                 </div>
@@ -203,4 +144,8 @@ But that's the difference in our opinions.</textarea>
   </body>
 
 <?php include "./sharedlayout/clientFooter.php";
+}
+else {
+	header("Location: login.php?error=2");
+}
 ?>
